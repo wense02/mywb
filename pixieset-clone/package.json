@@ -1,0 +1,12 @@
+{
+  "name": "pixieset-clone",
+  "version": "1.0.0",
+  "description": "A Pixieset clone with authentication and gallery features",
+  "scripts": {
+    "start": "concurrently \"cd client && npm start\" \"cd server && node server.js\"",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
