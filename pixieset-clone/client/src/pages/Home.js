@@ -46,7 +46,14 @@ const Home = () => {
   ];
 
   return (
-    <Box>
+    <Box 
+        sx={{ bgcolor: '#f5f5f5',
+          backgroundImage: 'url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5620000f-392a-4eca-bb00-406de0cd63d7/dl6vot-095e85e9-4b78-4fc3-81a3-be9530a4859a.jpg/v1/fill/w_600,h_800,q_75,strp/khhh_by_ajloveju.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi81NjIwMDAwZi0zOTJhLTRlY2EtYmIwMC00MDZkZTBjZDYzZDcvZGw2dm90LTA5NWU4NWU5LTRiNzgtNGZjMy04MWEzLWJlOTUzMGE0ODU5YS5qcGciLCJ3aWR0aCI6Ijw9NjAwIiwiaGVpZ2h0IjoiPD04MDAifV1dfQ.Uws0pfeGf-M-5Bqz0RlT0jge9GFWARpwx4rUjJibtfk)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        }}>
       {/* Hero Section */}
       <Box
         sx={{
@@ -54,7 +61,12 @@ const Home = () => {
           py: { xs: 8, md: 12 },
           textAlign: 'center',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          background: 'none',
+          // backgroundImage: 'url(https://i.pinimg.com/originals/38/4a/34/384a349714911e68ee3fb6bfdbe568cd.jpg)',
+          // backgroundSize: 'cover',
+          // backgroundPosition: 'center',
+          // backgroundRepeat: 'repeat',
         }}
       >
         <Container maxWidth="lg">
@@ -99,7 +111,7 @@ const Home = () => {
       </Box>
 
       {/* Features Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Container maxWidth="" sx={{ py: 8, backgroundColor: 'white',  }}>
         <Grid container spacing={4}>
           {features.map((feature, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
@@ -115,7 +127,11 @@ const Home = () => {
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    // backgroundSize: 'cover',
+                    // backgroundPosition: 'center',
+                    // backgroundRepeat: 'no-repeat',
+                    backgroundColor: 'white',
                   }}
                 >
                   <Box sx={{ color: 'primary.main', mb: 2 }}>
@@ -135,7 +151,7 @@ const Home = () => {
       </Container>
 
       {/* Testimonials Section */}
-      <Box sx={{ bgcolor: '#f5f5f5', py: 8 }}>
+      <Box sx={{ bgcolor: '#f5f5f5', py: 8 , background: 'none'}}>
         <Container maxWidth="lg">
           <Typography variant="h3" align="center" gutterBottom>
             What Our Users Say

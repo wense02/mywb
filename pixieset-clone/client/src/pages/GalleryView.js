@@ -296,6 +296,7 @@ const GalleryView = () => {
                       src={`${API_URL}${image.url}`}
                       alt={image.description || `Image ${index + 1}`}
                       loading="lazy"
+                      crossOrigin="anonymous"
                       style={{
                         borderRadius: 8,
                         width: '100%',
@@ -451,6 +452,7 @@ const GalleryView = () => {
                         src={URL.createObjectURL(file)}
                         alt={`Selected ${index + 1}`}
                         loading="lazy"
+                        crossOrigin="anonymous"
                         style={{ height: '100%', objectFit: 'cover' }}
                       />
                     </ImageListItem>

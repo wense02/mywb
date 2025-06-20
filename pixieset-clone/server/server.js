@@ -16,7 +16,7 @@ app.use(cors({
   origin: process.env.REACT_APP_URL || 'http://localhost:3002',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', '*']
 }));
 app.use(helmet());
 app.use(express.json());

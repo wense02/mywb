@@ -225,6 +225,8 @@ const Gallery = () => {
             reject(new Error('Failed to upload images'));
           }
         };
+        console.log('xhr.response', xhr.response);
+        console.log('xhr.status', xhr.status); 
 
         xhr.onerror = () => {
           reject(new Error('Failed to upload images'));
@@ -324,9 +326,11 @@ const Gallery = () => {
                     >
                       <CardMedia
                         component="img"
-                        height="200"
-                        image={gallery.coverImage ? `${API_URL}${gallery.coverImage}` : 'https://source.unsplash.com/800x600/?photography'}
+                        height="200px"
+                        src={`${API_URL}${gallery.coverImage}`}
                         alt={gallery.title}
+                        crossOrigin="anonymous"
+                        loading="lazy"
                       />
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -424,6 +428,7 @@ const Gallery = () => {
                         alt={`Selected ${index + 1}`}
                         loading="lazy"
                         style={{ height: '100%', objectFit: 'cover' }}
+                        crossOrigin="anonymous"
                       />
                     </ImageListItem>
                   ))}
@@ -472,3 +477,20 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
+// import pixieset-clone\server\uploads\1744127105207.jpg;
+// const loadImage = (imageName) => {
+//   import(`@/server/uploads/${imageName}`).then(image => {
+//     this.setState({
+//       image
+//     });
+//   });
+// };
+/**render() {
+  const { image } = this.state;
+  return (
+    <Fragment>
+      {image && <img src={image} alt="" />}
+    </Fragment>
+  );
+};*/

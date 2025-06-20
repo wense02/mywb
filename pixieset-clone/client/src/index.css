@@ -21,3 +21,14 @@ body {
 .section {
   padding: 4rem 0;
 }
+
+body[data-theme='light'] {
+  background-color: #ffffff; /* Matches lightTheme.palette.background.default */
+  color: #333333; /* Matches lightTheme.palette.text.primary */
+}
+
+/* Base colors for dark theme */
+body[data-theme='dark'] {
+  background-color: #282c34; /* Matches darkTheme.palette.background.default */
+  color: #f0f0f0; /* Matches darkTheme.palette.text.primary */
+}

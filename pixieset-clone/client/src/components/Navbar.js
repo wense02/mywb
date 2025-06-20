@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Button, Box, Container, IconButton, Drawer, List, ListItem, useScrollTrigger, Avatar, Menu, MenuItem, Divider } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Box,
+  Container,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  useScrollTrigger,
+  Avatar,
+  Menu,
+  MenuItem,
+  Divider,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { useTheme } from "../contexts/ThemeContext";
+import "../index.css"; 
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -15,13 +32,14 @@ const Navbar = () => {
     disableHysteresis: true,
     threshold: 0,
   });
+  const { mode, toggleTheme } = useTheme();
 
   const menuItems = [
-    { text: 'Client Gallery', link: '/gallery', protected: true },
-    { text: 'Store', link: '/store', protected: true },
-    { text: 'Website', link: '/website', protected: false },
-    { text: 'Studio Manager', link: '/studio', protected: false },
-    { text: 'Mobile App', link: '/mobile', protected: false },
+    { text: "Client Gallery", link: "/gallery", protected: true },
+    { text: "Store", link: "/store", protected: true },
+    { text: "Website", link: "/website", protected: false },
+    { text: "Studio Manager", link: "/studio", protected: false },
+    { text: "Mobile App", link: "/mobile", protected: false },
   ];
 
   const handleDrawerToggle = () => {
@@ -40,46 +58,54 @@ const Navbar = () => {
     try {
       await logout();
       handleMenuClose();
-      navigate('/');
+      navigate("/");
     } catch (error) {
-      console.error('Failed to log out:', error);
+      console.error("Failed to log out:", error);
     }
   };
 
   const isActive = (path) => location.pathname === path;
 
   const filteredMenuItems = menuItems.filter(
-    item => !item.protected || (item.protected && user)
+    (item) => !item.protected || (item.protected && user)
   );
 
   return (
-    <AppBar 
-      position="sticky" 
-      elevation={trigger ? 1 : 0} 
-      sx={{ 
-        bgcolor: 'background.default',
-        borderBottom: trigger ? 'none' : '1px solid',
-        borderColor: 'grey.200'
+    <AppBar
+      position="sticky"
+      elevation={trigger ? 1 : 0}
+      sx={{
+        bgcolor: "background.default",
+        borderBottom: trigger ? "none" : "1px solid",
+        borderColor: "grey.200",
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Box 
-              component="img" 
-              src="/logo.png" 
-              alt="Pixieset" 
-              sx={{ 
+        <Toolbar sx={{ justifyContent: "space-between", py: 1 }}>
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <Box
+              component="img"
+              src="/logo.png"
+              alt="Pixieset"
+              crossOrigin="anonymous"
+              loading="lazy"
+              sx={{
                 height: 32,
-                '&:hover': {
-                  opacity: 0.8
-                }
-              }} 
+                "&:hover": {
+                  opacity: 0.8,
+                },
+              }}
             />
           </Link>
 
           {/* Desktop Menu */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}>
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              gap: 1,
+              alignItems: "center",
+            }}
+          >
             {filteredMenuItems.map((item) => (
               <Button
                 key={item.text}
@@ -89,26 +115,50 @@ const Navbar = () => {
                 sx={{
                   px: 2,
                   py: 1,
-                  position: 'relative',
-                  '&::after': {
+                  position: "relative",
+                  "&::after": {
                     content: '""',
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 0,
                     left: 0,
-                    width: '100%',
+                    width: "100%",
                     height: 2,
-                    bgcolor: 'primary.main',
-                    transform: isActive(item.link) ? 'scaleX(1)' : 'scaleX(0)',
-                    transition: 'transform 0.3s ease-in-out',
+                    bgcolor: "primary.main",
+                    transform: isActive(item.link) ? "scaleX(1)" : "scaleX(0)",
+                    transition: "transform 0.3s ease-in-out",
                   },
-                  '&:hover::after': {
-                    transform: 'scaleX(1)',
-                  }
+                  "&:hover::after": {
+                    transform: "scaleX(1)",
+                  },
                 }}
               >
                 {item.text}
               </Button>
             ))}
+
+            <Button onClick={toggleTheme} color="inherit">
+              {mode === "light" ? "🌙" : "☀️"}
+              {/* sx={{
+                "&[data-theme='light']": {
+                  backgroundColor: '#ffffff',
+                  color: '#333333',
+                  navbarBg: '#f8f8f8',
+                  navbarText: '#333333',
+                  buttonBg: '#007bff',
+                  buttontext:' #ffffff',
+                  linkcolor: '#007bff',
+                },
+                '&[data-theme="dark"]': {
+                  backgroundColor:'#282c34',
+                  color: '#f0f0f0',
+                  navbarBg: '#333333',
+                  navbarText: '#f0f0f0',
+                  buttonBg: '#61dafb',
+                  buttontext:' #282c34',
+                  linkcolor: '#61dafb',
+                },
+              }} */}
+            </Button>
 
             {user ? (
               <>
@@ -116,14 +166,18 @@ const Navbar = () => {
                   onClick={handleMenuOpen}
                   sx={{
                     ml: 2,
-                    '&:hover': {
-                      transform: 'translateY(-2px)',
-                      transition: 'transform 0.2s ease-in-out',
-                    }
+                    "&:hover": {
+                      transform: "translateY(-2px)",
+                      transition: "transform 0.2s ease-in-out",
+                    },
                   }}
                 >
-                  <Avatar sx={{ bgcolor: 'primary.main' }}>
-                    {user.name ? user.name[0].toUpperCase() : <AccountCircleIcon />}
+                  <Avatar sx={{ bgcolor: "primary.main" }}>
+                    {user.name ? (
+                      user.name[0].toUpperCase()
+                    ) : (
+                      <AccountCircleIcon />
+                    )}
                   </Avatar>
                 </IconButton>
                 <Menu
@@ -132,19 +186,19 @@ const Navbar = () => {
                   onClose={handleMenuClose}
                   onClick={handleMenuClose}
                 >
-                  <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
-                  <MenuItem onClick={() => navigate('/settings')}>Settings</MenuItem>
+                  <MenuItem onClick={() => navigate("/profile")}>
+                    Profile
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/settings")}>
+                    Settings
+                  </MenuItem>
                   <Divider />
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </>
             ) : (
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                <Button
-                  component={Link}
-                  to="/login"
-                  color="primary"
-                >
+              <Box sx={{ display: "flex", gap: 1 }}>
+                <Button component={Link} to="/login" color="primary">
                   Sign In
                 </Button>
                 <Button
@@ -153,10 +207,10 @@ const Navbar = () => {
                   variant="contained"
                   color="primary"
                   sx={{
-                    '&:hover': {
-                      transform: 'translateY(-2px)',
-                      transition: 'transform 0.2s ease-in-out',
-                    }
+                    "&:hover": {
+                      transform: "translateY(-2px)",
+                      transition: "transform 0.2s ease-in-out",
+                    },
                   }}
                 >
                   Get Started
@@ -170,7 +224,7 @@ const Navbar = () => {
             color="primary"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ display: { md: 'none' } }}
+            sx={{ display: { md: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -183,12 +237,12 @@ const Navbar = () => {
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
-        sx={{ 
-          display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': { 
+        sx={{
+          display: { xs: "block", md: "none" },
+          "& .MuiDrawer-paper": {
             width: 280,
-            bgcolor: 'background.default'
-          }
+            bgcolor: "background.default",
+          },
         }}
       >
         <List sx={{ pt: 2 }}>
@@ -200,12 +254,14 @@ const Navbar = () => {
                 to={item.link}
                 onClick={handleDrawerToggle}
                 sx={{
-                  justifyContent: 'flex-start',
-                  color: isActive(item.link) ? 'primary.main' : 'text.primary',
-                  bgcolor: isActive(item.link) ? 'primary.light' : 'transparent',
-                  '&:hover': {
-                    bgcolor: 'primary.light',
-                  }
+                  justifyContent: "flex-start",
+                  color: isActive(item.link) ? "primary.main" : "text.primary",
+                  bgcolor: isActive(item.link)
+                    ? "primary.light"
+                    : "transparent",
+                  "&:hover": {
+                    bgcolor: "primary.light",
+                  },
                 }}
               >
                 {item.text}
@@ -220,7 +276,7 @@ const Navbar = () => {
                   fullWidth
                   onClick={() => {
                     handleDrawerToggle();
-                    navigate('/profile');
+                    navigate("/profile");
                   }}
                 >
                   Profile
@@ -231,7 +287,7 @@ const Navbar = () => {
                   fullWidth
                   onClick={() => {
                     handleDrawerToggle();
-                    navigate('/settings');
+                    navigate("/settings");
                   }}
                 >
                   Settings
@@ -275,7 +331,17 @@ const Navbar = () => {
                 </Button>
               </ListItem>
             </>
-          )}
+             )}
+            <ListItem sx={{ px: 2, py: 1 }}>
+            <Button
+              fullWidth
+              onClick={toggleTheme}
+              color="inherit"
+              sx={{ justifyContent: "flex-start" }}
+            >
+              {mode === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+            </Button>
+          </ListItem>
         </List>
       </Drawer>
     </AppBar>
