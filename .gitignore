@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+yarn.lock
+package-lock.json
+
+# Build
+build
+
+# Editor
+.idea
+.vscode
+
+# Other
+.DS_Store
+
+# Logs
+logs
+
+# IDE
+.idea
+.vscode
+
+# Other
+.DS_Store
+
