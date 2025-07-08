@@ -1,0 +1,70 @@
+/* Ensure the body background changes with theme */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  /* Light theme body styles */
+  body[data-theme="light"] {
+    background-color: #fafafa;
+    color: #111827;
+  }
+  
+  /* Dark theme body styles */
+  body[data-theme="dark"] {
+    background-color: #0f172a;
+    color: #f8fafc;
+  }
+  
+  /* Ensure the root html element also gets proper background */
+  html {
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  html[data-theme="light"] {
+    background-color: #fafafa;
+  }
+  
+  html[data-theme="dark"] {
+    background-color: #0f172a;
+  }
+  
+  /* Scrollbar styling for dark mode */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  body[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+  
+  body[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+  
+  body[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+  }
+  
+  body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+  }
+  
+  /* Ensure proper text selection colors */
+  body[data-theme="light"] ::selection {
+    background-color: rgba(37, 99, 235, 0.2);
+    color: #111827;
+  }
+  
+  body[data-theme="dark"] ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: #f8fafc;
+  }

@@ -12,7 +12,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Footer from './components/Footer';
 import { AuthProvider } from './contexts/AuthContext';
-
+import ScrollProgress from './components/ScrollProgress';
+import './styles/global.css'
+import AppRoutes from './routes/AppRoutes'
 const theme = createTheme({
   palette: {
     primary: {
@@ -100,8 +102,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <Router>
+        <Router> 
+          <ScrollProgress />
           <Navbar />
+          <AppRoutes />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

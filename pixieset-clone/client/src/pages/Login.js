@@ -39,7 +39,7 @@ const Login = () => {
       setError('');
       setLoading(true);
       await login(formData.email, formData.password);
-      const from = location.state?.from?.pathname || '/gallery';
+      const from = location.state?.from?.pathname || '/dashboard';
       navigate(from, { replace: true });
     } catch (err) {
       setError(err.message || 'Failed to sign in');

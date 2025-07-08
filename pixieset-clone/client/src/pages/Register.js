@@ -49,7 +49,7 @@ const Register = () => {
       }
 
       await register(formData.email, formData.password, formData.name);
-      navigate('/gallery');
+      navigate('/dashboard');
     } catch (err) {
       console.error('Registration error:', err);
       if (err.message === 'Failed to fetch') {
